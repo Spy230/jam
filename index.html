@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAM — Массаж в Москве</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #0d0d0f;
+            color: #f5f5f7;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-bottom: 2px solid #c2185b;
+        }
+
+        header h1 {
+            font-size: 56px;
+            font-weight: bold;
+            color: #ff2a6d;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        header h2 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #d4af37;
+            margin-bottom: 40px;
+        }
+
+        .contacts {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .contacts a {
+            display: block;
+            font-size: 32px;
+            font-weight: bold;
+            padding: 25px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: transform 0.1s;
+        }
+
+        .contacts a:active {
+            transform: scale(0.98);
+        }
+
+        .phone {
+            background-color: #ff2a6d;
+            color: #f5f5f7;
+            box-shadow: 0 4px 15px rgba(255, 42, 109, 0.3);
+        }
+
+        .telegram {
+            background-color: #c2185b;
+            color: #f5f5f7;
+            box-shadow: 0 4px 15px rgba(194, 24, 91, 0.3);
+        }
+
+        .services {
+            margin: 60px 0;
+        }
+
+        .services h2 {
+            font-size: 42px;
+            font-weight: bold;
+            text-align: center;
+            color: #ff2a6d;
+            margin-bottom: 40px;
+        }
+
+        .service-item {
+            background-color: rgba(194, 24, 91, 0.08);
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 42, 109, 0.3);
+        }
+
+        .service-item h3 {
+            font-size: 36px;
+            font-weight: bold;
+            color: #ff2a6d;
+            margin-bottom: 15px;
+        }
+
+        .service-item .price {
+            font-size: 42px;
+            font-weight: bold;
+            color: #ff2a6d;
+            margin-bottom: 15px;
+        }
+
+        .service-item .description {
+            font-size: 24px;
+            font-weight: bold;
+            color: #d4af37;
+        }
+
+        .certificates {
+            margin: 60px 0;
+        }
+
+        .certificates h2 {
+            font-size: 42px;
+            font-weight: bold;
+            text-align: center;
+            color: #ff2a6d;
+            margin-bottom: 40px;
+        }
+
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+            justify-items: center;
+        }
+
+        .certificate-item {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, rgba(255, 42, 109, 0.2), rgba(194, 24, 91, 0.2));
+            border: 1px solid rgba(255, 42, 109, 0.3);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+
+        .map-section {
+            margin: 60px 0;
+        }
+
+        .map-section h2 {
+            font-size: 42px;
+            font-weight: bold;
+            text-align: center;
+            color: #ff2a6d;
+            margin-bottom: 40px;
+        }
+
+        .map-link {
+            text-decoration: none;
+        }
+
+        .map-placeholder {
+            background-color: rgba(194, 24, 91, 0.08);
+            border: 1px solid rgba(255, 42, 109, 0.3);
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: #f5f5f7;
+            transition: transform 0.1s;
+        }
+
+        .map-link:active .map-placeholder {
+            transform: scale(0.98);
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 2px solid #c2185b;
+        }
+
+        footer p {
+            font-size: 24px;
+            font-weight: bold;
+            color: #f5f5f7;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 42px;
+            }
+
+            header h2 {
+                font-size: 22px;
+            }
+
+            .contacts a {
+                font-size: 26px;
+                padding: 20px;
+                min-height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .service-item h3 {
+                font-size: 28px;
+            }
+
+            .service-item .price {
+                font-size: 34px;
+            }
+
+            .service-item .description {
+                font-size: 20px;
+            }
+
+            .certificates h2, .map-section h2, .services h2 {
+                font-size: 32px;
+                margin-bottom: 30px;
+            }
+
+            .certificates-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                gap: 15px;
+            }
+
+            .certificate-item {
+                width: 100px;
+                height: 100px;
+                font-size: 40px;
+            }
+
+            .map-placeholder {
+                font-size: 20px;
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>JAM</h1>
+        <h2>Массажная Студия • Москва</h2>
+        <div class="contacts">
+            <a href="tel:+79634728270" class="phone">📞 +7 (963) 472-82-70</a>
+            <a href="https://t.me/Asti121119" class="telegram">💬 Написать в Telegram</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="services">
+            <h2>Наши услуги</h2>
+
+            <div class="service-item">
+                <h3>Classic</h3>
+                <div class="price">7 000 ₽</div>
+                <div class="description">Классический массаж всего тела</div>
+            </div>
+
+            <div class="service-item">
+                <h3>VIP</h3>
+                <div class="price">12 000 ₽</div>
+                <div class="description">Полный релакс: массаж + ароматерапия + музыка</div>
+            </div>
+
+            <div class="service-item">
+                <h3>Silver</h3>
+                <div class="price">9 000 ₽</div>
+                <div class="description">Усиленный массаж спины и шеи</div>
+            </div>
+
+            <div class="service-item">
+                <h3>Express</h3>
+                <div class="price">5 000 ₽</div>
+                <div class="description">Быстрый 30-минутный массаж</div>
+            </div>
+
+            <div class="service-item">
+                <h3>Общение</h3>
+                <div class="price">5 000 ₽</div>
+                <div class="description">Приятная беседа с девушкой в уютной обстановке</div>
+            </div>
+        </section>
+
+        <section class="certificates">
+            <h2>Наши сертификаты</h2>
+            <div class="certificates-grid">
+                <div class="certificate-item">🏅</div>
+                <div class="certificate-item">✓</div>
+                <div class="certificate-item">🌿</div>
+                <div class="certificate-item">💆</div>
+                <div class="certificate-item">⭐</div>
+                <div class="certificate-item">🛀</div>
+            </div>
+        </section>
+
+        <section class="map-section">
+            <h2>Нас легко найти</h2>
+            <a href="https://yandex.ru/maps/?text=Москва" target="_blank" class="map-link">
+                <div class="map-placeholder">📍 Москва, центр (точный адрес по запросу)</div>
+            </a>
+        </section>
+    </div>
+
+    <footer>
+        <p>Свяжитесь с нами прямо сейчас:</p>
+        <div class="contacts">
+            <a href="tel:+79634728270" class="phone">📞 +7 (963) 472-82-70</a>
+            <a href="https://t.me/Asti121119" class="telegram">💬 Написать в Telegram</a>
+        </div>
+    </footer>
+</body>
+</html>
