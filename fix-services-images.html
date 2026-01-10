@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фикс изображений услуг</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0d0d0f;
+            color: #fff;
+            padding: 40px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #ff2a6d;
+            margin-bottom: 30px;
+        }
+        .log {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 42, 109, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .log-entry {
+            margin: 5px 0;
+            padding: 5px;
+        }
+        .success {
+            color: #00ff00;
+        }
+        .error {
+            color: #ff0000;
+        }
+        .info {
+            color: #00bfff;
+        }
+        .warning {
+            color: #ffa500;
+        }
+        button {
+            background: linear-gradient(45deg, #ff2a6d, #c2185b);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 42, 109, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Диагностика и фикс изображений услуг</h1>
+        
+        <button onclick="runDiagnostics()">🔍 Запустить диагностику</button>
+        <button onclick="clearLog()">🗑️ Очистить лог</button>
+        <button onclick="window.location.href='index.html'">🏠 Вернуться на главную</button>
+        
+        <div class="log" id="log"></div>
+    </div>
+
+    <script>
+        const logDiv = document.getElementById('log');
+
+        function log(message, type = 'info') {
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logDiv.appendChild(entry);
+            logDiv.scrollTop = logDiv.scrollHeight;
+            console.log(message);
+        }
+
+        function clearLog() {
+            logDiv.innerHTML = '';
+        }
+
+        async function runDiagnostics() {
+            clearLog();
+            log('=== НАЧАЛО ДИАГНОСТИКИ ===', 'info');
+            log('', 'info');
+
+            // Проверка 1: Текущий URL
+            log(`📍 Текущий URL: ${window.location.href}`, 'info');
+            log(`📍 Базовый путь: ${window.location.origin}`, 'info');
+            log('', 'info');
+
+            // Проверка 2: Наличие Swiper
+            log('🔍 Проверка библиотеки Swiper...', 'info');
+            if (typeof Swiper !== 'undefined') {
+                log('✅ Swiper загружен', 'success');
+            } else {
+                log('❌ Swiper НЕ загружен!', 'error');
+                log('⚠️ Загружаем Swiper...', 'warning');
+                await loadSwiper();
+            }
+            log('', 'info');
+
+            // Проверка 3: Изображения
+            log('🖼️ Проверка изображений услуг...', 'info');
+            const images = [
+                'images/mod/services/CLASSIC.png',
+                'images/mod/services/VIP.png',
+                'images/mod/services/SILVER.png',
+                'images/mod/services/EXPRESS.png',
+                'images/mod/services/ОБЩЕНИЕ.png'
+            ];
+
+            let successCount = 0;
+            let errorCount = 0;
+
+            for (const imgPath of images) {
+                const result = await checkImage(imgPath);
+                if (result.success) {
+                    log(`✅ ${imgPath} - OK (${result.width}x${result.height}px)`, 'success');
+                    successCount++;
+                } else {
+                    log(`❌ ${imgPath} - ОШИБКА: ${result.error}`, 'error');
+                    errorCount++;
+                }
+            }
+
+            log('', 'info');
+            log(`📊 Результат: ${successCount} успешно, ${errorCount} ошибок`, successCount === images.length ? 'success' : 'warning');
+            log('', 'info');
+
+            // Проверка 4: CSS
+            log('🎨 Проверка CSS...', 'info');
+            const cssLoaded = document.querySelector('link[href*="custom-styles.css"]');
+            if (cssLoaded) {
+                log('✅ custom-styles.css подключен', 'success');
+            } else {
+                log('❌ custom-styles.css НЕ подключен!', 'error');
+            }
+            log('', 'info');
+
+            // Проверка 5: JavaScript
+            log('📜 Проверка JavaScript...', 'info');
+            const jsLoaded = document.querySelector('script[src*="custom-scripts.js"]');
+            if (jsLoaded) {
+                log('✅ custom-scripts.js подключен', 'success');
+            } else {
+                log('❌ custom-scripts.js НЕ подключен!', 'error');
+            }
+            log('', 'info');
+
+            // Итоговый вердикт
+            if (successCount === images.length) {
+                log('🎉 ВСЕ ИЗОБРАЖЕНИЯ ЗАГРУЖАЮТСЯ КОРРЕКТНО!', 'success');
+                log('', 'info');
+                log('💡 Если на главной странице изображения не видны:', 'warning');
+                log('   1. Очистите кеш браузера (Ctrl+Shift+Delete)', 'warning');
+                log('   2. Перезагрузите страницу с очисткой кеша (Ctrl+F5)', 'warning');
+                log('   3. Проверьте консоль браузера (F12) на ошибки', 'warning');
+            } else {
+                log('⚠️ ОБНАРУЖЕНЫ ПРОБЛЕМЫ С ЗАГРУЗКОЙ ИЗОБРАЖЕНИЙ', 'error');
+                log('', 'info');
+                log('🔧 Возможные решения:', 'warning');
+                log('   1. Проверьте, что файлы существуют в папке images/mod/services/', 'warning');
+                log('   2. Проверьте права доступа к файлам', 'warning');
+                log('   3. Убедитесь, что сервер запущен корректно', 'warning');
+            }
+
+            log('', 'info');
+            log('=== ДИАГНОСТИКА ЗАВЕРШЕНА ===', 'info');
+        }
+
+        function checkImage(src) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                
+                img.onload = function() {
+                    resolve({
+                        success: true,
+                        width: this.naturalWidth,
+                        height: this.naturalHeight
+                    });
+                };
+                
+                img.onerror = function() {
+                    resolve({
+                        success: false,
+                        error: 'Файл не найден или недоступен'
+                    });
+                };
+                
+                img.src = src;
+            });
+        }
+
+        function loadSwiper() {
+            return new Promise((resolve, reject) => {
+                const link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css';
+                document.head.appendChild(link);
+
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js';
+                script.onload = () => {
+                    log('✅ Swiper успешно загружен', 'success');
+                    resolve();
+                };
+                script.onerror = () => {
+                    log('❌ Ошибка загрузки Swiper', 'error');
+                    reject();
+                };
+                document.body.appendChild(script);
+            });
+        }
+
+        // Автозапуск при загрузке страницы
+        window.addEventListener('load', () => {
+            log('🚀 Страница загружена. Нажмите кнопку для запуска диагностики.', 'info');
+        });
+    </script>
+</body>
+</html>

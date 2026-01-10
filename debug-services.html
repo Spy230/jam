@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Диагностика секции услуг</title>
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="custom-styles.css">
+    <style>
+        body {
+            background: #0d0d0f;
+            color: white;
+            padding: 20px;
+        }
+        .debug-info {
+            background: rgba(255, 42, 109, 0.1);
+            border: 1px solid #ff2a6d;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        h1 {
+            color: #ff2a6d;
+        }
+    </style>
+</head>
+<body>
+    <h1>Диагностика секции услуг</h1>
+    
+    <div class="debug-info">
+        <h2>Информация о загрузке</h2>
+        <div id="debugOutput"></div>
+    </div>
+
+    <!-- Копия секции услуг из index.html -->
+    <section id="services" class="services-trinity">
+        <div class="services-trinity-container">
+            <!-- Левый блок с контентом -->
+            <div class="services-content">
+                <div class="services-content-inner">
+                    <h2 class="services-title">ТОП <span class="services-number">5</span><br>ПРОГРАММ</h2>
+                    <div class="services-description" id="serviceDescription">
+                        <p>Тестовое описание услуг</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Правый блок со слайдером -->
+            <div class="services-slider-wrapper">
+                <div class="swiper servicesSwiper">
+                    <div class="swiper-wrapper">
+                        <!-- Слайд 1: Classic -->
+                        <div class="swiper-slide" data-service="classic">
+                            <div class="service-slide-card">
+                                <div class="service-slide-image">
+                                    <img src="images/mod/services/CLASSIC.png" alt="Classic">
+                                </div>
+                                <div class="service-slide-info">
+                                    <h3 class="service-slide-title">Classic</h3>
+                                    <div class="service-slide-meta">
+                                        <span class="service-slide-price">7000 ₽</span>
+                                        <span class="service-slide-duration">/ 1 час</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Слайд 2: VIP -->
+                        <div class="swiper-slide" data-service="vip">
+                            <div class="service-slide-card">
+                                <div class="service-slide-image">
+                                    <img src="images/mod/services/VIP.png" alt="VIP">
+                                </div>
+                                <div class="service-slide-info">
+                                    <h3 class="service-slide-title">VIP</h3>
+                                    <div class="service-slide-meta">
+                                        <span class="service-slide-price">12000 ₽</span>
+                                        <span class="service-slide-duration">/ 1.5 часа</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Слайд 3: Silver -->
+                        <div class="swiper-slide" data-service="silver">
+                            <div class="service-slide-card">
+                                <div class="service-slide-image">
+                                    <img src="images/mod/services/SILVER.png" alt="Silver">
+                                </div>
+                                <div class="service-slide-info">
+                                    <h3 class="service-slide-title">Silver</h3>
+                                    <div class="service-slide-meta">
+                                        <span class="service-slide-price">9000 ₽</span>
+                                        <span class="service-slide-duration">/ 1 час</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Слайд 4: Express -->
+                        <div class="swiper-slide" data-service="express">
+                            <div class="service-slide-card">
+                                <div class="service-slide-image">
+                                    <img src="images/mod/services/EXPRESS.png" alt="Express">
+                                </div>
+                                <div class="service-slide-info">
+                                    <h3 class="service-slide-title">Express</h3>
+                                    <div class="service-slide-meta">
+                                        <span class="service-slide-price">5000 ₽</span>
+                                        <span class="service-slide-duration">/ 30 минут</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Слайд 5: Общение -->
+                        <div class="swiper-slide" data-service="conversation">
+                            <div class="service-slide-card">
+                                <div class="service-slide-image">
+                                    <img src="images/mod/services/ОБЩЕНИЕ.png" alt="Общение с девушкой">
+                                </div>
+                                <div class="service-slide-info">
+                                    <h3 class="service-slide-title">Общение с девушкой</h3>
+                                    <div class="service-slide-meta">
+                                        <span class="service-slide-price">5000 ₽</span>
+                                        <span class="service-slide-duration">/ 1 час</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Пагинация -->
+                    <div class="swiper-pagination"></div>
+
+                    <!-- Навигация -->
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    <script>
+        const debugOutput = document.getElementById('debugOutput');
+        
+        function log(message) {
+            console.log(message);
+            debugOutput.innerHTML += `<p>${message}</p>`;
+        }
+
+        // Проверяем загрузку изображений
+        document.querySelectorAll('.service-slide-image img').forEach((img, index) => {
+            img.onload = function() {
+                log(`✅ Изображение ${index + 1} загружено: ${this.src}`);
+            };
+            img.onerror = function() {
+                log(`❌ ОШИБКА загрузки изображения ${index + 1}: ${this.src}`);
+            };
+        });
+
+        // Проверяем наличие Swiper
+        if (typeof Swiper !== 'undefined') {
+            log('✅ Библиотека Swiper загружена');
+        } else {
+            log('❌ Библиотека Swiper НЕ загружена');
+        }
+
+        // Проверяем элемент
+        const swiperElement = document.querySelector('.servicesSwiper');
+        if (swiperElement) {
+            log('✅ Элемент .servicesSwiper найден');
+            log(`Количество слайдов: ${swiperElement.querySelectorAll('.swiper-slide').length}`);
+        } else {
+            log('❌ Элемент .servicesSwiper НЕ найден');
+        }
+
+        // Инициализируем Swiper
+        document.addEventListener('DOMContentLoaded', function() {
+            log('DOM загружен, инициализируем Swiper...');
+            
+            try {
+                const servicesSwiper = new Swiper('.servicesSwiper', {
+                    direction: 'vertical',
+                    slidesPerView: 'auto',
+                    spaceBetween: 30,
+                    centeredSlides: false,
+                    loop: true,
+                    autoplay: {
+                        delay: 4000,
+                        disableOnInteraction: false,
+                    },
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    breakpoints: {
+                        320: {
+                            slidesPerView: 1,
+                            spaceBetween: 20,
+                        },
+                        768: {
+                            slidesPerView: 'auto',
+                            spaceBetween: 30,
+                        }
+                    },
+                    on: {
+                        init: function() {
+                            log('✅ Swiper инициализирован успешно!');
+                            log(`Активных слайдов: ${this.slides.length}`);
+                        }
+                    }
+                });
+            } catch (error) {
+                log(`❌ Ошибка инициализации Swiper: ${error.message}`);
+            }
+        });
+    </script>
+</body>
+</html>
