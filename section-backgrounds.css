@@ -1,0 +1,90 @@
+/* ========================================
+   ФОНЫ ДЛЯ РАЗДЕЛОВ САЙТА
+   ======================================== */
+
+/* Наши услуги */
+.services-trinity {
+    background: #000000 !important;
+    padding: 80px 0;
+}
+
+/* О нас */
+.about-us {
+    background: #3d0814 !important;
+    margin: 60px 0;
+    padding: 60px 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 42, 109, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Сертификаты */
+.certificates {
+    background: #0d0d0f;
+    margin: 60px 0;
+    padding: 60px 0;
+}
+
+/* Наши Мастера */
+.masters-section {
+    background: #3d0a19 !important;
+    margin: 80px 0;
+    padding: 60px 20px;
+    border-radius: 20px;
+}
+
+/* Почему выбирают именно нас */
+.why-us {
+    background: #000000;
+    margin: 60px 0;
+    padding: 60px 0;
+}
+
+/* Интерьер */
+.interior {
+    background: #4a0a18 !important;
+    margin: 60px 0;
+    padding: 60px 20px;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid rgba(255, 42, 109, 0.3);
+}
+
+/* Отзывы */
+.reviews-section {
+    background: #3d0814;
+    margin: 80px 0;
+    padding: 60px 20px;
+}
+
+/* Где найти / Контакты */
+.map-section {
+    background: #1a1a1a;
+    margin: 60px 0;
+    padding: 60px 0;
+}
+
+/* Промо-акция */
+.promo-section {
+    background: transparent;
+    margin: 60px 0;
+    padding: 0 20px;
+}
+
+/* Футер */
+footer {
+    background-color: #0a0a0c !important;
+    padding: 50px 20px 30px;
+    border-top: 2px solid #c2185b;
+}
+
+/* Удаляем старые градиенты и убираем ::before эффекты */
+.about-us::before {
+    display: none;
+}
+
+.interior::before {
+    display: none;
+}
